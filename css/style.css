@@ -330,7 +330,6 @@ a:hover {
 }
 .section p {
   margin-bottom: 16px;
-  max-width: 70ch;
   color: var(--text);
 }
 
@@ -573,7 +572,7 @@ a:hover {
   margin-top: 12px;
   transform-origin: top center;
 }
-.factory-caption {
+p.factory-caption {
   text-align: center;
   font-size: 0.9rem;
   color: var(--text-muted);
@@ -1352,6 +1351,475 @@ a:hover {
 @keyframes f-wave-r {
   to {
     background-position-x: -30px;
+  }
+}
+
+/* ---------- Contact scene ----------
+   A message typed on the laptop takes off as a paper plane, flies over the
+   broadcasting tower and past the satellite, then lands in the mailbox:
+   flag up, +1 notification. One shared 12s timeline. */
+
+.c-moon {
+  position: absolute;
+  top: 28px;
+  right: 90px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e8eef5;
+  box-shadow: 0 0 22px 6px rgba(232, 238, 245, 0.35);
+}
+.c-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: #142133;
+  border-top: 3px solid #243650;
+}
+.c-desk {
+  position: absolute;
+  left: 70px;
+  bottom: 92px;
+  width: 120px;
+  height: 8px;
+  background: #3d5270;
+  border-radius: 3px;
+  z-index: 2;
+}
+.c-desk::before,
+.c-desk::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  width: 7px;
+  height: 56px;
+  background: #2c3e54;
+}
+.c-desk::before {
+  left: 8px;
+}
+.c-desk::after {
+  right: 8px;
+}
+.c-laptop {
+  position: absolute;
+  left: 100px;
+  bottom: 100px;
+  width: 60px;
+  height: 5px;
+  background: #5a6b7d;
+  border-radius: 2px 2px 0 0;
+  z-index: 3;
+}
+.c-laptop-screen {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  width: 50px;
+  height: 36px;
+  background: #16243a;
+  border: 2px solid #3d5270;
+  border-radius: 3px;
+  box-shadow: 0 0 16px 2px rgba(111, 177, 240, 0.25);
+}
+.c-laptop-screen::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 26px;
+  height: 4px;
+  border-radius: 2px;
+  background: #6fb1f0;
+  box-shadow: 0 8px 0 -1px #135aa0, 0 16px 0 -1px #2a9d8f;
+}
+.c-typing {
+  position: absolute;
+  left: 150px;
+  bottom: 152px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 6px 8px;
+  background: #dde6ef;
+  border-radius: 10px 10px 10px 2px;
+  z-index: 3;
+}
+.c-typing span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #5a6b7d;
+  animation: c-dots 1.4s ease-in-out infinite;
+}
+.c-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.c-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.c-at {
+  position: absolute;
+  left: 90px;
+  bottom: 150px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: #8fc1f5;
+  opacity: 0;
+  animation: c-rise 6s ease-out infinite;
+}
+.c-at-2 {
+  left: 116px;
+  animation-delay: 3s;
+}
+
+/* radio tower */
+.c-tower {
+  position: absolute;
+  left: 405px;
+  bottom: 36px;
+  width: 46px;
+  height: 190px;
+  background: repeating-linear-gradient(
+    0deg,
+    #2c3e54 0 14px,
+    #3d5270 14px 17px
+  );
+  clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+  z-index: 2;
+}
+.c-tower-light {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: #ff5f57;
+  box-shadow: 0 0 8px 2px rgba(255, 95, 87, 0.6);
+  animation: c-beacon 2s steps(1) infinite;
+}
+.c-ring {
+  position: absolute;
+  left: 393px;
+  bottom: 196px;
+  width: 70px;
+  height: 70px;
+  border: 2px solid rgba(111, 177, 240, 0.7);
+  border-radius: 50%;
+  opacity: 0;
+  animation: c-ring 2.8s ease-out infinite;
+}
+.c-ring-2 {
+  animation-delay: 0.9s;
+}
+.c-ring-3 {
+  animation-delay: 1.8s;
+}
+
+/* satellite */
+.c-satellite {
+  position: absolute;
+  top: 34px;
+  left: 600px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  animation: c-sat-drift 16s ease-in-out infinite alternate;
+}
+.c-sat-panel {
+  width: 24px;
+  height: 12px;
+  background: repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.25) 0 3px,
+      transparent 3px 7px
+    ),
+    #1d4f8a;
+  border: 1px solid #2c6cb5;
+}
+.c-sat-body {
+  position: relative;
+  width: 16px;
+  height: 15px;
+  background: #9bb0c3;
+  border-radius: 3px;
+}
+.c-sat-light {
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #28c840;
+  animation: c-beacon 1.4s steps(1) infinite;
+}
+
+/* wire & pigeon */
+.c-wire {
+  position: absolute;
+  left: 452px;
+  bottom: 150px;
+  width: 312px;
+  height: 46px;
+  border-bottom: 2px solid #3d5270;
+  border-radius: 50%;
+  z-index: 1;
+}
+.c-pole {
+  position: absolute;
+  left: 772px;
+  bottom: 36px;
+  width: 6px;
+  height: 160px;
+  background: #2c3e54;
+  z-index: 1;
+}
+.c-pigeon {
+  position: absolute;
+  left: 596px;
+  bottom: 151px;
+  width: 16px;
+  height: 11px;
+  background: #9bb0c3;
+  border-radius: 55% 60% 45% 50%;
+  z-index: 2;
+  animation: c-bob 2.6s ease-in-out infinite alternate;
+}
+.c-pigeon::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #9bb0c3;
+}
+.c-pigeon::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  border-left: 5px solid #e8a13a;
+}
+
+/* paper plane */
+.c-plane {
+  position: absolute;
+  left: 0;
+  bottom: 140px;
+  width: 26px;
+  height: 16px;
+  background: #e8eef5;
+  clip-path: polygon(0 0, 100% 50%, 0 100%, 22% 52%);
+  opacity: 0;
+  z-index: 8;
+  filter: drop-shadow(0 0 6px rgba(232, 238, 245, 0.35));
+  animation: c-plane-fly 12s linear infinite;
+}
+
+/* mailbox */
+.c-mailbox {
+  position: absolute;
+  left: 700px;
+  bottom: 36px;
+  width: 52px;
+  height: 102px;
+  z-index: 5;
+}
+.c-mailbox::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 22px;
+  width: 8px;
+  height: 74px;
+  background: #3d5270;
+}
+.c-mailbox::after {
+  content: "";
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  width: 52px;
+  height: 32px;
+  background: #c0392b;
+  border-radius: 12px 12px 4px 4px;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25);
+}
+.c-flag {
+  position: absolute;
+  bottom: 102px;
+  left: 6px;
+  width: 3px;
+  height: 16px;
+  background: #e8a13a;
+  transform-origin: bottom center;
+  transform: rotate(115deg);
+  z-index: 6;
+  animation: c-flag-up 12s linear infinite;
+}
+.c-flag::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 3px;
+  width: 10px;
+  height: 7px;
+  background: #e8a13a;
+}
+.c-badge {
+  position: absolute;
+  bottom: 112px;
+  left: 34px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: #28c840;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  z-index: 7;
+  animation: c-badge-pop 12s linear infinite;
+}
+
+/* contact scene keyframes */
+@keyframes c-plane-fly {
+  0%,
+  16% {
+    transform: translate(135px, 5px) rotate(-30deg);
+    opacity: 0;
+  }
+  19% {
+    transform: translate(168px, -18px) rotate(-26deg);
+    opacity: 1;
+  }
+  34% {
+    transform: translate(420px, -102px) rotate(-6deg);
+  }
+  50% {
+    transform: translate(645px, -45px) rotate(16deg);
+  }
+  62% {
+    transform: translate(700px, -2px) rotate(26deg);
+    opacity: 1;
+  }
+  64%,
+  100% {
+    transform: translate(716px, 8px) rotate(28deg);
+    opacity: 0;
+  }
+}
+@keyframes c-flag-up {
+  0%,
+  66% {
+    transform: rotate(115deg);
+  }
+  71%,
+  90% {
+    transform: rotate(0deg);
+  }
+  96%,
+  100% {
+    transform: rotate(115deg);
+  }
+}
+@keyframes c-badge-pop {
+  0%,
+  67% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.4);
+  }
+  72% {
+    opacity: 1;
+    transform: translateY(0) scale(1.15);
+  }
+  75% {
+    transform: translateY(-2px) scale(1);
+  }
+  86% {
+    opacity: 1;
+    transform: translateY(-14px) scale(1);
+  }
+  92%,
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+}
+@keyframes c-ring {
+  0% {
+    transform: scale(0.15);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+@keyframes c-dots {
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+@keyframes c-rise {
+  0%,
+  55% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  62% {
+    opacity: 0.9;
+  }
+  90%,
+  100% {
+    transform: translateY(-46px);
+    opacity: 0;
+  }
+}
+@keyframes c-beacon {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  60%,
+  100% {
+    opacity: 0.15;
+  }
+}
+@keyframes c-sat-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-70px);
+  }
+}
+@keyframes c-bob {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(2px);
   }
 }
 
