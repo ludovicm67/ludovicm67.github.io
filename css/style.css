@@ -379,6 +379,175 @@ a:hover {
   }
 }
 
+/* ---------- Services ---------- */
+
+/* Animated CI/CD pipeline: a pulse travels along the track and lights up
+   each stage as it passes */
+.pipeline {
+  position: relative;
+  margin: 44px 0 8px;
+}
+.pipeline-steps {
+  list-style: none;
+  display: flex;
+  position: relative;
+}
+.pipeline-steps::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--border);
+}
+.pipeline-steps li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+}
+.pipeline-steps li::before {
+  content: "";
+  position: relative;
+  z-index: 2;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--blue);
+  animation: node-glow 10s linear infinite;
+  animation-delay: calc(var(--i) * 2.5s);
+}
+.pipeline-pulse {
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+  left: 10%;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: #6fb1f0;
+  box-shadow: 0 0 14px 4px rgba(111, 177, 240, 0.55);
+  animation: pulse-move 10s linear infinite;
+}
+@keyframes pulse-move {
+  0% {
+    left: 10%;
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 1;
+  }
+  100% {
+    left: 90%;
+    opacity: 0;
+  }
+}
+@keyframes node-glow {
+  0%,
+  5% {
+    background-color: #6fb1f0;
+    border-color: #6fb1f0;
+    box-shadow: 0 0 14px 3px rgba(111, 177, 240, 0.65);
+  }
+  12%,
+  100% {
+    background-color: var(--bg);
+    border-color: var(--blue);
+    box-shadow: none;
+  }
+}
+
+.skill-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+.skill-card {
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.skill-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--blue);
+}
+.skill-card svg {
+  width: 38px;
+  height: 38px;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: rgba(19, 90, 160, 0.1);
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  margin-bottom: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  .skill-card svg {
+    background-color: rgba(111, 177, 240, 0.12);
+    stroke: #6fb1f0;
+  }
+}
+.skill-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+.skill-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 36px;
+  padding: 30px 34px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  color: #fff;
+}
+.cta-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.cta .cta-text p {
+  color: #fff;
+  margin: 0;
+}
+.cta .cta-text p + p {
+  color: #cfe4fa;
+}
+.button-light {
+  background-color: #fff;
+  color: var(--blue);
+}
+.button-light:hover {
+  background-color: #e8f1fb;
+}
+
 /* ---------- Social cards ---------- */
 
 .social-grid {
@@ -503,6 +672,23 @@ a:hover {
   }
 }
 
+@media screen and (max-width: 1020px) {
+  .skill-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 600px) {
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
+  .pipeline-steps li {
+    font-size: 0.7rem;
+  }
+  .cta {
+    padding: 24px;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .site-header nav a {
     padding: 8px 10px;
@@ -518,7 +704,20 @@ a:hover {
   }
   .site-header,
   .hero,
-  .skip-link {
+  .skip-link,
+  .pipeline,
+  .cta {
+    display: none;
+  }
+  .skill-grid {
+    display: block;
+  }
+  .skill-card {
+    box-shadow: none;
+    border: none;
+    padding: 4px 0;
+  }
+  .skill-card svg {
     display: none;
   }
   .section {
